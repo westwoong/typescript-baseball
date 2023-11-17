@@ -1,3 +1,6 @@
+#
+.idea/
+.gitmessage.txt
 # Logs
 logs
 *.log
