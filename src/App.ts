@@ -3,11 +3,11 @@ import * as readlineSync from 'readline-sync';
 export class App {
     async play() {
         console.log('숫자 야구 게임을 시작합니다.');
-        const number = readlineSync.question('숫자를 입력해주세요 : ');
+        const userInputNumber = readlineSync.question('숫자를 입력해주세요 : ');
 
         try {
-            this.validateInputNumber(number);
-            console.log(number);
+            this.validateInputNumber(userInputNumber);
+            console.log(userInputNumber);
             const computerNumber = await this.generateThreeRandomNumber();
             console.log(computerNumber);
         } catch (error: any) {
