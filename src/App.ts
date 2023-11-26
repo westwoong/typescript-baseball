@@ -3,25 +3,29 @@ import * as readlineSync from 'readline-sync';
 export class App {
     async play() {
         console.log('숫자 야구 게임을 시작합니다.');
+        let game = true;
+        let computerNumber = await this.generateThreeRandomNumber();
 
-        const computerNumber = await this.generateThreeRandomNumber();
-        let game = false;
-
-        while (!game) {
+        while (game) {
             try {
                 const userInputNumber = readlineSync.question('숫자를 입력해주세요 : ');
                 this.validateInputNumber(userInputNumber);
 
-                // const computerNumber = 512;
-                // console.log(`컴퓨터 입력값 : ${computerNumber}`);
+                console.log(`컴퓨터 입력값 : ${computerNumber}`);
 
                 const result = this.resultGameValue(userInputNumber, String(computerNumber));
                 console.log(result);
 
                 if (result === '3스트라이크 0볼') {
                     console.log(`${userInputNumber} 니가 입력한거`)
-                    console.log('니가 이김');
-                    game = true;
+                    const test = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
+                    if(test === '1'){
+                        computerNumber = await this.generateThreeRandomNumber();
+                        game = true;
+                    }
+                    else {
+                        game = false;
+                    }
                 }
             } catch (error: any) {
                 console.error(error.message);
