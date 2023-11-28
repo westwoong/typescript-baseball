@@ -1,7 +1,7 @@
 import * as readlineSync from 'readline-sync';
 import {validateInputNumber} from "./validator/validateNumber";
 import {GameDisplay} from "./conf/gameDisplay";
-import {resultGameValue} from "./conf/gameFunction";
+import {calculateGameResult} from "./conf/gameFunction";
 
 export class App {
     private game: GameDisplay;
@@ -17,9 +17,8 @@ export class App {
             try {
                 const userInputNumber = readlineSync.question('숫자를 입력해주세요 : ');
                 validateInputNumber(userInputNumber);
-                console.log(`컴퓨터 입력값 : ${this.game.getComputerNumber()}`);
 
-                const result = resultGameValue(userInputNumber, this.game.getComputerNumber());
+                const result = calculateGameResult(userInputNumber, this.game.getComputerNumber());
                 console.log(`게임 결과 : ${result}`);
 
                 gameRun = this.game.isGameClear(result, gameRun);

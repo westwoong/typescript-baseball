@@ -4,7 +4,7 @@ export function generateThreeRandomNumber(): number {
     return parseInt(shuffleNumbers.join(''));
 }
 
-export function resultGameValue(userInput: string, computerInput: string): string {
+export function calculateGameResult(userInput: string, computerInput: string): string {
     let strike = 0;
     let count = 0;
     for (let strikePosition = 0; strikePosition < 3; strikePosition++) {
