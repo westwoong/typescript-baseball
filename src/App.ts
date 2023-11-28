@@ -1,5 +1,6 @@
 import * as readlineSync from 'readline-sync';
 import {validateInputNumber} from "./validator/validateNumber";
+import {generateThreeRandomNumber} from "./conf/gameFunction";
 
 export class App {
     private computerNumber: string;
@@ -7,7 +8,7 @@ export class App {
 
     constructor() {
         console.log('숫자 야구 게임을 시작합니다.');
-        this.computerNumber = String(this.generateThreeRandomNumber());
+        this.computerNumber = String(generateThreeRandomNumber());
         this.game = true;
     }
 
@@ -38,25 +39,11 @@ export class App {
         const playAgainInput = readlineSync.question('\n니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력 : ');
         if (playAgainInput === '1') {
             console.log('\n게임을 다시 시작합니다.');
-            this.computerNumber = String(this.generateThreeRandomNumber());
+            this.computerNumber = String(generateThreeRandomNumber());
             return true;
         } else {
             return false;
         }
-    }
-
-    private generateThreeRandomNumber(): number {
-        const numberRule = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        const shuffleNumbers = this.shuffleNumber(numberRule).slice(0, 3);
-        return parseInt(shuffleNumbers.join(''));
-    }
-
-    private shuffleNumber(numberArray: number[]): number[] {
-        for (let index = numberArray.length - 1; index > 0; index--) {
-            const randomIndex = Math.floor(Math.random() * (index + 1));
-            [numberArray[index], numberArray[randomIndex]] = [numberArray[randomIndex], numberArray[index]];
-        }
-        return numberArray;
     }
 
     private resultGameValue(userInput: string, computerInput: string): string {
