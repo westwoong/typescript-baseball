@@ -1,34 +1,45 @@
 import * as readlineSync from 'readline-sync';
 
 export class App {
-    async play() {
+    computerNumber: number;
+
+    constructor() {
         console.log('숫자 야구 게임을 시작합니다.');
+        this.computerNumber = this.generateThreeRandomNumber();
+    }
+
+    async play() {
         let game = true;
-        let computerNumber = this.generateThreeRandomNumber();
 
         while (game) {
             try {
                 const userInputNumber = readlineSync.question('숫자를 입력해주세요 : ');
                 this.validateInputNumber(userInputNumber);
 
-                console.log(`컴퓨터 입력값 : ${computerNumber}`);
+                console.log(`컴퓨터 입력값 : ${this.computerNumber}`);
 
-                const result = this.resultGameValue(userInputNumber, String(computerNumber));
+                const result = this.resultGameValue(userInputNumber, String(this.computerNumber));
                 console.log(result);
 
                 if (result === '3스트라이크 0볼') {
-                    console.log(`${userInputNumber} 니가 입력한거`)
-                    const playAgainInput = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
-                    if (playAgainInput === '1') {
-                        computerNumber = this.generateThreeRandomNumber();
-                        game = true;
-                    } else {
-                        game = false;
-                    }
+                    console.log(`${userInputNumber} 니가 입력한거`);
+                    game = await this.isPlayAgain();
                 }
+
             } catch (error: any) {
                 console.error(error.message);
             }
+        }
+    }
+
+    private async isPlayAgain(): Promise<boolean> {
+        const playAgainInput = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력 : ');
+        if (playAgainInput === '1') {
+            console.log('게임을 다시 시작합니다.');
+            this.computerNumber = this.generateThreeRandomNumber();
+            return true;
+        } else {
+            return false;
         }
     }
 
