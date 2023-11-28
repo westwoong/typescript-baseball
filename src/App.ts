@@ -1,12 +1,12 @@
 import * as readlineSync from 'readline-sync';
 
 export class App {
-    private computerNumber: number;
+    private computerNumber: string;
     private game: boolean;
 
     constructor() {
         console.log('숫자 야구 게임을 시작합니다.');
-        this.computerNumber = this.generateThreeRandomNumber();
+        this.computerNumber = String(this.generateThreeRandomNumber());
         this.game = true;
     }
 
@@ -17,11 +17,10 @@ export class App {
                 this.validateInputNumber(userInputNumber);
                 console.log(`컴퓨터 입력값 : ${this.computerNumber}`);
 
-                const result = this.resultGameValue(userInputNumber, String(this.computerNumber));
-                console.log(result);
+                const result = this.resultGameValue(userInputNumber, this.computerNumber);
+                console.log(`게임 결과 : ${result}`);
 
                 this.isGameClear(result);
-
             } catch (error: any) {
                 console.error(error.message);
             }
@@ -38,7 +37,7 @@ export class App {
         const playAgainInput = readlineSync.question('\n니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력 : ');
         if (playAgainInput === '1') {
             console.log('\n게임을 다시 시작합니다.');
-            this.computerNumber = this.generateThreeRandomNumber();
+            this.computerNumber = String(this.generateThreeRandomNumber());
             return true;
         } else {
             return false;
