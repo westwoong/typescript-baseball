@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@woowacourse/mission-utils": "^2.1.1"
+    "@types/readline-sync": "^1.4.8",
+    "@woowacourse/mission-utils": "^2.1.1",
+    "readline-sync": "^1.4.10"
   }
 }
