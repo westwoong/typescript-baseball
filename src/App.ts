@@ -34,8 +34,8 @@ export class App {
 
     private async generateThreeRandomNumber() {
         const numberRule = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        const randomNumber = this.shuffleNumber(numberRule).slice(0, 3);
-        return parseInt(randomNumber.join(''));
+        const shuffleNumbers = this.shuffleNumber(numberRule).slice(0, 3);
+        return parseInt(shuffleNumbers.join(''));
     }
 
     private shuffleNumber(numberArray: number[]): number[] {
