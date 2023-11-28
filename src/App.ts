@@ -51,9 +51,9 @@ export class App {
     }
 
     private shuffleNumber(numberArray: number[]): number[] {
-        for (let i = numberArray.length - 1; i > 0; i--) {
-            const randomIndex = Math.floor(Math.random() * (i + 1));
-            [numberArray[i], numberArray[randomIndex]] = [numberArray[randomIndex], numberArray[i]];
+        for (let index = numberArray.length - 1; index > 0; index--) {
+            const randomIndex = Math.floor(Math.random() * (index + 1));
+            [numberArray[index], numberArray[randomIndex]] = [numberArray[randomIndex], numberArray[index]];
         }
         return numberArray;
     }
@@ -74,20 +74,19 @@ export class App {
     }
 
     private resultGameValue(userInput: string, computerInput: string): string {
-        let ball;
         let strike = 0;
         let count = 0;
-        for (let i = 0; i < 3; i++) {
-            if (userInput[i] === computerInput[i]) {
+        for (let strikePosition = 0; strikePosition < 3; strikePosition++) {
+            if (userInput[strikePosition] === computerInput[strikePosition]) {
                 strike++;
             }
-            for (let a = 0; a < 3; a++) {
-                if (userInput[i] == computerInput[a]) {
+            for (let ballPosition = 0; ballPosition < 3; ballPosition++) {
+                if (userInput[strikePosition] == computerInput[ballPosition]) {
                     count++;
                 }
             }
         }
-        ball = count - strike;
+        let ball = count - strike;
         return `${strike}스트라이크 ${ball}볼`;
     }
 }
