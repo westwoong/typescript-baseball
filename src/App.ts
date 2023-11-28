@@ -4,7 +4,7 @@ export class App {
     async play() {
         console.log('숫자 야구 게임을 시작합니다.');
         let game = true;
-        let computerNumber = await this.generateThreeRandomNumber();
+        let computerNumber = this.generateThreeRandomNumber();
 
         while (game) {
             try {
@@ -20,7 +20,7 @@ export class App {
                     console.log(`${userInputNumber} 니가 입력한거`)
                     const playAgainInput = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
                     if (playAgainInput === '1') {
-                        computerNumber = await this.generateThreeRandomNumber();
+                        computerNumber = this.generateThreeRandomNumber();
                         game = true;
                     } else {
                         game = false;
@@ -32,7 +32,7 @@ export class App {
         }
     }
 
-    private async generateThreeRandomNumber() {
+    private generateThreeRandomNumber() {
         const numberRule = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         const shuffleNumbers = this.shuffleNumber(numberRule).slice(0, 3);
         return parseInt(shuffleNumbers.join(''));
