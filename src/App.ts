@@ -1,4 +1,5 @@
 import * as readlineSync from 'readline-sync';
+import {validateInputNumber} from "./validator/validateNumber";
 
 export class App {
     private computerNumber: string;
@@ -14,7 +15,7 @@ export class App {
         while (this.game) {
             try {
                 const userInputNumber = readlineSync.question('숫자를 입력해주세요 : ');
-                this.validateInputNumber(userInputNumber);
+                validateInputNumber(userInputNumber);
                 console.log(`컴퓨터 입력값 : ${this.computerNumber}`);
 
                 const result = this.resultGameValue(userInputNumber, this.computerNumber);
@@ -56,21 +57,6 @@ export class App {
             [numberArray[index], numberArray[randomIndex]] = [numberArray[randomIndex], numberArray[index]];
         }
         return numberArray;
-    }
-
-    private validateInputNumber(inputNumber: string) {
-        this.validateIsNumber(inputNumber);
-        this.validateIsDuplicate(inputNumber);
-    }
-
-    private validateIsNumber(input: string) {
-        const validateRule = /^[1-9]{3}$/;
-        if (!validateRule.test(input)) throw new Error('유효하지 않은 입력, 1~9까지 서로 다른 3자리 수를 입력해주세요.');
-    }
-
-    private validateIsDuplicate(input: string) {
-        const uniqueNumber = new Set(input);
-        if (uniqueNumber.size !== 3) throw new Error('중복된 숫자가 있습니다. 서로 다른 숫자를 입력하세요.');
     }
 
     private resultGameValue(userInput: string, computerInput: string): string {
