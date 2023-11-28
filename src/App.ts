@@ -74,7 +74,6 @@ export class App {
     }
 
     private resultGameValue(userInput: string, computerInput: string): string {
-        let ball;
         let strike = 0;
         let count = 0;
         for (let i = 0; i < 3; i++) {
@@ -87,7 +86,7 @@ export class App {
                 }
             }
         }
-        ball = count - strike;
+        let ball = count - strike;
         return `${strike}스트라이크 ${ball}볼`;
     }
 }
