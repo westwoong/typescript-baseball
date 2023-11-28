@@ -18,8 +18,8 @@ export class App {
 
                 if (result === '3스트라이크 0볼') {
                     console.log(`${userInputNumber} 니가 입력한거`)
-                    const test = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
-                    if (test === '1') {
+                    const playAgainInput = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
+                    if (playAgainInput === '1') {
                         computerNumber = await this.generateThreeRandomNumber();
                         game = true;
                     } else {
@@ -34,8 +34,8 @@ export class App {
 
     private async generateThreeRandomNumber() {
         const numberRule = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        const test = this.shuffleNumber(numberRule).slice(0, 3);
-        return parseInt(test.join(''));
+        const randomNumber = this.shuffleNumber(numberRule).slice(0, 3);
+        return parseInt(randomNumber.join(''));
     }
 
     private shuffleNumber(numberArray: number[]): number[] {
