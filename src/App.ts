@@ -19,11 +19,10 @@ export class App {
                 if (result === '3스트라이크 0볼') {
                     console.log(`${userInputNumber} 니가 입력한거`)
                     const test = readlineSync.question('니가 이김, 게임 다시할꺼? 할꺼면 1 입력, 안할꺼면 2입력');
-                    if(test === '1'){
+                    if (test === '1') {
                         computerNumber = await this.generateThreeRandomNumber();
                         game = true;
-                    }
-                    else {
+                    } else {
                         game = false;
                     }
                 }
@@ -48,9 +47,17 @@ export class App {
     }
 
     private validateInputNumber(inputNumber: string) {
+        this.validateIsNumber(inputNumber);
+        this.validateIsDuplicate(inputNumber);
+    }
+
+    private validateIsNumber(input: string) {
         const validateRule = /^[1-9]{3}$/;
-        const uniqueNumber = new Set(inputNumber);
-        if (!validateRule.test(inputNumber)) throw new Error('유효하지 않은 입력, 1~9까지 서로 다른 3자리 수를 입력해주세요.');
+        if (!validateRule.test(input)) throw new Error('유효하지 않은 입력, 1~9까지 서로 다른 3자리 수를 입력해주세요.');
+    }
+
+    private validateIsDuplicate(input: string) {
+        const uniqueNumber = new Set(input);
         if (uniqueNumber.size !== 3) throw new Error('중복된 숫자가 있습니다. 서로 다른 숫자를 입력하세요.');
     }
 
